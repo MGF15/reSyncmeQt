@@ -60,5 +60,3 @@ class Ui_about(object):
         about.setWindowTitle(_translate("about", "About", None))
         self.label.setText(_translate("about", "Python GUI tool to Synchronize Subtitles files srt and ass", None))
         self.label_3.setText(_translate("about", "by MGF15", None))
-        self.label_4.setText(_translate("about", "Source", None))
-
