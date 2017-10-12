@@ -12,4 +12,14 @@ Python GUI tool to Synchronize Subtitles files [.srt](https://en.wikipedia.org/w
 
 > python resyncme.py
 
-> add time 
+-------------
+
+> to add time 
+
+![png](https://raw.githubusercontent.com/MGF15/reSyncmeQt/master/add.png)
+
+-------------
+
+> to remove time
+
+![img](https://raw.githubusercontent.com/MGF15/reSyncmeQt/master/remove.png)
