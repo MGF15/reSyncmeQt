@@ -46,8 +46,12 @@ class MyForm(QtGui.QMainWindow):
 			new = c+'.00' if len(c) < 14 else c[:-4]
 		return new
 
-	def sync(self,file,sub):
-	
+	def sync(self,subfile,sub):
+
+		bom = subfile[:2] 
+		#check if the file encoded in utf-16 
+		utf16 = True if bom[:2] == '\xff\xfe' else False
+
 		if sub == "srt":
 			u = 1 # 10 if .ass 1 if .srt
 			rex = r"\d+:\d+:\d+,\d+"
@@ -56,8 +60,11 @@ class MyForm(QtGui.QMainWindow):
 			u = 10 # 10 if .ass 1 if .srt
 			rex = r"\d:\d+:\d+.\d+"
 			rex2 = r"(\d):(\d+):(\d+).(\d+)"
-		
-		f = re.findall(rex,file)
+
+		if utf16 == True :
+			subfile = subfile.decode('utf-16')
+
+		f = re.findall(rex,subfile)
 
 		for i in f:
 	
@@ -67,9 +74,12 @@ class MyForm(QtGui.QMainWindow):
 			new_time = datetime.timedelta(hours=time[0]+self.h, minutes=time[1]+self.m, seconds=time[2]+self.s, milliseconds=time[3]*u+self.ms)
 
 			fix_new_time = self.edittime(sub,new_time)
-			file = re.sub(i,fix_new_time,file)
-		
-		return file
+
+			subfile = re.sub(i,fix_new_time,subfile)
+
+		subfile = subfile.encode('utf-16') if utf16 else subfile
+
+		return subfile
 
 	def getfile(self):
 
