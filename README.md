@@ -26,7 +26,7 @@ to remove time
 
 #
 
-# Subtitles files support 
+# Subtitles files 
 
   ``` 
   * srt
