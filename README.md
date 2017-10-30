@@ -12,7 +12,6 @@ Python GUI tool to Synchronize Subtitles files [.srt](https://en.wikipedia.org/w
 
 > python resyncme.py
 
--------------
 # 
 
 to add time 
