@@ -1,14 +1,14 @@
+#!/usr/bin/python
 #Python GUI tool to Synchronize Subtitles files srt and ass
 #coded by MGF15
 #my first Qt :P 
 import sys,re,datetime
 from PyQt4 import QtCore, QtGui
-
 from sync import Ui_MainWindow
 from about import Ui_about
 
-class about(QtGui.QMainWindow):
 
+class about(QtGui.QMainWindow):
 
 	def __init__(self, parent=None):
 		QtGui.QWidget.__init__(self, parent)
@@ -17,7 +17,6 @@ class about(QtGui.QMainWindow):
 		self.ui.setupUi(self)
 
 class MyForm(QtGui.QMainWindow):
-
 
 	def __init__(self, parent=None):
 		QtGui.QWidget.__init__(self, parent)
@@ -49,7 +48,7 @@ class MyForm(QtGui.QMainWindow):
 	def sync(self,subfile,sub):
 
 		bom = subfile[:2] 
-		#check if the file encoded in utf-16 
+		# check if the file encoded in utf-16 
 		utf16 = True if bom[:2] == '\xff\xfe' else False
 
 		if sub == "srt":
@@ -83,8 +82,11 @@ class MyForm(QtGui.QMainWindow):
 
 	def getfile(self):
 
-		self.fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', '',"Subtitles files (*.srt *.ass)")
-
+		self.fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', '',"Subtitle Files (*.srt *.ass)")
+		
+		if self.fname != "":		
+			self.ui.pushButton_2.setText(self.fname.split("/")[-1])
+		
 		try:
 			self.subfile = open(self.fname,"rb").read()
 		except:
@@ -92,12 +94,18 @@ class MyForm(QtGui.QMainWindow):
 
 
 	def savefile(self):
+
 		try:
-			sub = self.fname[-3:]
+			sub = self.fname
 		except:
 			sub = '*'
 
-		self.sname = QtGui.QFileDialog.getSaveFileName(self, 'Save file', '*.'+sub,"Subtitles files (*.srt *.ass)")
+		self.sname = QtGui.QFileDialog.getSaveFileName(self, 'Save file', '*.'+sub,"Subtitle Files (*.srt *.ass)")
+	
+		if self.sname != "":	
+			self.ui.pushButton_3.setText(self.sname.split("/")[-1])
+		else:
+			self.sname = None
 
 	def n_sync(self):
 
